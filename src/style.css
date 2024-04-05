@@ -22,7 +22,34 @@
 .tasks-list .item.template-task {
     display: none;
 }
+.tasks-list {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 .tasks-list .item {
     display: flex;
     justify-content: space-evenly;
+}
+.item .remove-btn {
+    width: 20px;
+    aspect-ratio: 1 / 1;
+    background-color: transparent;
+    color: red;
+    border: 1px solid red;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.add-btn {
+    position: absolute;
+    width: 50px;
+    aspect-ratio: 1 / 1;
+    border: 1px solid black;
+    border-radius: 50%;
+    background-color: rgb(48, 252, 48);
+    font-size: 25px;
+    cursor: pointer;
+    font-weight: bolder;
 }
