@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+.content {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255, 123, 0);
+}
+
+.tasks-editor {
+    width: 500px;
+    aspect-ratio: 1 / 1;
+    background-color: white;
+    border-radius: 12%;
+}
+.tasks-list .item.template-task {
+    display: none;
+}
+.tasks-list .item {
+    display: flex;
+    justify-content: space-evenly;
+}
