@@ -1,4 +1,4 @@
-* {
+*:not(dialog) {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -14,10 +14,12 @@
 }
 
 .tasks-editor {
-    padding-left: 80px;
-    padding-right: 80px;
-    width: 600px;
-    aspect-ratio: 1 / 1;
+    --padding: 70px;
+    padding-left: var(--padding);
+    padding-right: var(--padding);
+    --width: 700px;
+    width: var(--width);
+    height: 95vh;
     background-color: white;
     border-radius: 12%;
 }
@@ -25,23 +27,29 @@
     display: flex;
 }
 .groups-list div {
-    background-color: grey;
+    background-color: rgb(212, 212, 212);
     width: 100px;
     height: 30px;
     text-align: center;
     border-bottom-right-radius: 35%;
     border-bottom-left-radius: 35%;
 }
-.groups-list .group-selected {
-    background-color: rgb(212, 212, 212);
+.groups-list .selected {
+    background-color: grey;
+    color: white;
 }
 
 .tasks-list .item.template-task {
     display: none;
 }
 .tasks-list {
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-top: 50px;
+    height: 80%;
     display: flex;
     flex-direction: column;
+    overflow: scroll;
     gap: 20px;
 }
 .tasks-list .item {
@@ -57,31 +65,40 @@
     color: red;
     border: 1px solid red;
     border-radius: 50%;
-    cursor: pointer;
 }
 
 .add-btn {
-    position: relative;
-    width: 50px;
-    aspect-ratio: 1 / 1;
+    position: absolute;
+    margin-top: 40px;
+    margin-left: calc(var(--width) - var(--padding));
+    width: 40px;
+    height: 50px;
     border: 1px solid black;
-    border-radius: 50%;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border-left: none;
     background-color: rgb(48, 252, 48);
     font-size: 25px;
-    cursor: pointer;
-    font-weight: bolder;
+    font-weight: 500;
+    transition: width 0.1s;
+}
+.add-btn:hover {
+    width: 50px;
+    font-weight: 800;
 }
 
-dialog {
-    padding: 20px;
-    /* display: flex;
-    flex-direction: column;
-    gap: 0px; */
-
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    /* height: fit-content; */
+.desc-dialog {
+    margin: 0;
+    padding: 5px;
+    position: absolute;
+    width: 200px;
+    font-size: 12px;
+    border: 1px solid black;
+    background-color: rgb(224, 224, 224);
+    word-wrap: break-word;
+    z-index: 11;
+}
+.task-dialog, .group-dialog {
     border-radius: 20px;
 }
 .task-dialog {
@@ -105,12 +122,8 @@ dialog select, label {
     width: 50%;
 }
 
-dialog[open] {
+.group-dialog[open], .task-dialog[open] {
     animation: fade-in 0.3s ease-out;
-}
-  
-dialog[open]::backdrop {
-  animation: backdrop-fade-in 0.7s ease-out forwards;
 }
 
 @keyframes fade-in {

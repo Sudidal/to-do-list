@@ -1,10 +1,13 @@
 import { createTask, deleteTask, getGroups,
-         addGroup, changeCurGroup, getCurGroup } from "./index";
+         addGroup, changeCurGroup, getCurGroup,
+         getCurGroupIndex } from "./index";
 
 const addBtn = document.querySelector(".add-btn")
 const templateTask = document.querySelector(".template-task")
 const taskList = document.querySelector(".tasks-list")
 const groupsList = document.querySelector(".groups-list")
+
+const descDialog = document.querySelector(".desc-dialog")
 
 const newGroupBtn = document.querySelector(".new-group-btn")
 const groupDialog = document.querySelector(".group-dialog")
@@ -17,6 +20,8 @@ const titleInput = document.querySelector("#title-input")
 const dateInput = document.querySelector("#date-input")
 const descInput = document.querySelector("#desc-input")
 const createTaskBtn = document.querySelector("#create-task-btn")
+
+let isDescModal = false;
 
 addBtn.addEventListener("click", () => {
     UpdateSelectGroupList();
@@ -35,6 +40,12 @@ createTaskBtn.addEventListener("click", () => {
     getNewTaskInfo();
     taskDialog.close();
 })
+document.body.addEventListener("mousedown", () => {
+    if(isDescModal) {
+        descDialog.close();
+        isDescModal = false;
+    }
+})
 
 function createTaskElement(task) {
     const element = templateTask.cloneNode(true);
@@ -42,15 +53,28 @@ function createTaskElement(task) {
 
     element.querySelector(".title").textContent = task.getTitle();
     element.querySelector(".date").textContent = task.getDueDate();
-    element.querySelector(".checked").checked = task.isChecked();
+    const checkedElement = element.querySelector(".checked");
+    checkedElement.checked = task.isChecked();
 
-    element.querySelector(".checked").
-    addEventListener("click", () => {
-        task.toggleCheck();
+    
+    checkedElement.addEventListener("click", () => {
+        task.setChecked(checkedElement.checked);
     })
     element.querySelector(".remove-btn").
     addEventListener("click", () => {
         deleteTask(task);
+    })
+    element.querySelector(".expand-btn").
+    addEventListener("mouseup", (event) => {
+        if(!isDescModal) {
+            let mousePosX = event.clientX
+            let mousePosY = event.clientY;
+            descDialog.style = `top: ${mousePosY}px; left: calc(${mousePosX}px);`
+            descDialog.querySelector("p").textContent = task.getDescription();
+            descDialog.show();
+            
+            isDescModal = true;
+        }
     })
     taskList.appendChild(element);
 }
@@ -88,10 +112,23 @@ function UpdateGroupList() {
     const element = document.createElement("div");
         element.textContent = getGroups()[i];
         element.addEventListener("click", () => {
-            changeCurGroup(i);
+            selectGroup(i);
         })
         groupsList.appendChild(element);
     }
+    setGroupsStyle();
+}
+
+function selectGroup(i) {
+    changeCurGroup(i);
+    setGroupsStyle();
+}
+
+function setGroupsStyle() {
+    for(let i = 0; i < groupsList.childElementCount; i++) {
+        groupsList.childNodes[i].classList.remove("selected")
+    }
+    groupsList.childNodes[getCurGroupIndex()].classList.add("selected")
 }
 
 function getNewTaskInfo() {
@@ -102,5 +139,6 @@ function getNewTaskInfo() {
 
     createTask(title, desc, date, group)
 }
+
 
 export { updateTasksList, UpdateGroupList }
