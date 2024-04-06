@@ -8,16 +8,55 @@
 <body>
     <div class="content">
         <div class="tasks-editor">
+            <div class="groups-list">
+            </div>
             <div class="tasks-list">
                 <div class="item template-task">
                     <button class="remove-btn">x</button>
                     <p class="title">Pray</p>
                     <p class="date">13/1/2024</p>
-                    <input type="checkbox">
+                    <input class="checked" type="checkbox">
                 </div>
             </div>
             <button class="add-btn">+</button>
         </div>
     </div>
+    <dialog class="task-dialog">
+        <form method="dialog">
+            <div>
+                <!-- group -->
+                <label for="select-group">Select Group</label>
+                <div class="group-section">
+                    <select id="select-group">
+                    
+                    </select>
+                    <button type="button" class="new-group-btn">New Group</button>
+                </div>
+            </div>
+            <div>
+                <!-- Title -->
+                <label for="title-input">Task Title</label>
+                <input id="title-input" type="text" placeholder="Enter task title">
+            </div>
+            <div>
+                <!-- date -->
+                <label for="date-input">DueDate</label>
+                <input id="date-input" type="date">
+            </div>
+            <div>
+                <label for="desc-input">Description</label>
+                <textarea id="desc-input" cols="30" rows="10" placeholder="Describe...."></textarea>
+            </div>
+            <button id="create-task-btn" type="button">Create</button>
+            <button>Cancel</button>
+        </form>
+    </dialog>
+    <dialog class="group-dialog">
+        <div>
+            <label for="">New Group</label>
+            <input id="group-input" type="text" placeholder="new group name">
+        </div>
+        <button id="add-group-btn">Add</button>
+    </dialog>
 </body>
 </html>

@@ -1,7 +1,11 @@
 import "./style.css"
-import { updateTasksList } from "./visual";
+import { updateTasksList, UpdateGroupList } from "./visual";
 
 let tasks = Array();
+let groups = ["daily"];
+let curGroup = Number();
+
+UpdateGroupList();
 
 function Task(title, description, dueDate, group) {
     let checked = false;
@@ -17,10 +21,8 @@ function Task(title, description, dueDate, group) {
              getGroup, isChecked, toggleCheck}
 }
 
-let i = 0;
-function createTask() {
-    i++;
-    const newTask = Task(`task.${i}`, "amazing task", "not now", "unimportant group");
+function createTask(title, desc, dueDate, group) {
+    const newTask = Task(title, desc, dueDate, group);
     tasks.push(newTask);
     updateTasksList(tasks);
 }
@@ -30,5 +32,31 @@ function deleteTask(task) {
     updateTasksList(tasks);
 }
 
+function getGroups() {
+    return groups;
+}
+function getCurGroup() {
+    return groups[curGroup];
+}
+function addGroup(input) {
+    groups.forEach((group) => {
+        if(group == input)
+        {
+            console.error("Group already exist");
+            return false
+        }
+    });
+    groups.push(input)
+    UpdateGroupList();
+    console.log(groups)
+    return true;
+}
+function changeCurGroup(index) {
+    curGroup = index;
+    updateTasksList(tasks);
+}
 
-export { createTask, deleteTask }
+
+
+export { createTask, deleteTask, getGroups, addGroup,
+         changeCurGroup, getCurGroup }
