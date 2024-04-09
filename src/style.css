@@ -5,6 +5,13 @@
     font-family: sans-serif;
 }
 
+button, .clickable, input[type="checkbox"] {
+    cursor: pointer;
+}
+button {
+    padding: 5px;
+}
+
 .content {
     height: 100vh;
     display: flex;
@@ -25,6 +32,7 @@
 }
 .tasks-editor .groups-list {
     display: flex;
+    overflow: scroll;
 }
 .groups-list div {
     background-color: rgb(212, 212, 212);
@@ -43,8 +51,6 @@
     display: none;
 }
 .tasks-list {
-    padding-left: 8px;
-    padding-right: 8px;
     margin-top: 50px;
     height: 80%;
     display: flex;
@@ -55,16 +61,36 @@
 .tasks-list .item {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+}
+.item div {
+    word-break: break-all;
+    text-align: center;
+    flex: 1;
+    font-size: 13px;
+}
+.item div.title-div {
+    text-align: start;
+    flex: 2;
 }
 
 .item .remove-btn {
-    width: 20px;
-    aspect-ratio: 1 / 1;
+    padding: 0;
+    width: 23px;
+    height: 23px;
+    font-size: 10px;
     background-color: transparent;
     color: red;
     border: 1px solid red;
     border-radius: 50%;
+}
+.item .expand-btn {
+    width: 30px;
+    aspect-ratio: 1 / 1;
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 40%;
+    font-weight: bold;
 }
 
 .add-btn {
@@ -94,6 +120,7 @@
     width: 200px;
     font-size: 12px;
     border: 1px solid black;
+    border-radius: 10px;
     background-color: rgb(224, 224, 224);
     word-wrap: break-word;
     z-index: 11;

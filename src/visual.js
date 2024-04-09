@@ -110,6 +110,7 @@ function UpdateGroupList() {
 
     for(let i = 0; i < getGroups().length; i++) {
     const element = document.createElement("div");
+        element.classList.add("clickable")
         element.textContent = getGroups()[i];
         element.addEventListener("click", () => {
             selectGroup(i);

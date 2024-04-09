@@ -1,5 +1,6 @@
 import "./style.css"
 import { updateTasksList, UpdateGroupList } from "./visual";
+import { validateGroup, validateText } from "./validator";
 
 let tasks = [];
 let groups = ["daily"];
@@ -28,10 +29,16 @@ function Task(title, description, dueDate, group, checked = false) {
 }
 
 function createTask(title, desc, dueDate, group) {
+    if(!validateText(title, "Title", 1, 20) ||
+       !validateText(dueDate, "dueDate", 1)) {
+        return false;
+    }
+
     const newTask = Task(title, desc, dueDate, group);
     tasks.push(newTask);
     updateTasksList(tasks);
     populateStorage();
+    return true;
 }
 function deleteTask(task) {
     const index = tasks.indexOf(task);
@@ -49,19 +56,15 @@ function getCurGroupIndex() {
     return curGroup;
 }
 function addGroup(input) {
-    groups.forEach((group) => {
-        if(group == input)
-        {
-            console.error("Group already exist");
-            return false
-        }
-    });
-    groups.push(input)
-
-    UpdateGroupList();
-    populateStorage();
-
-    return true;
+    if(validateGroup(input)) {
+        groups.push(input)
+        UpdateGroupList();
+        populateStorage();
+        return true
+    }
+    else {
+        return false
+    }
 }
 function changeCurGroup(index) {
     curGroup = index;
