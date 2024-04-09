@@ -1,10 +1,11 @@
 import { getGroups } from "./index";
+import { showErrorDialog } from "./visual";
 
 const NO_ISSUE_MESSAGE = "No issue was found in the input"
 
 function validateGroup(input) {
     if(input === "") {
-        throwError.log("Empty Group!")
+        throwError("Please enter group name!")
         return false;
     }
     let groups = getGroups();
@@ -32,6 +33,7 @@ function validateText(input, inputName, min = 0, max = null) {
 
 function throwError(message, inputName = "") {
     console.log(`${message}, "${inputName}"`);
+    showErrorDialog(inputName, message)
 }
 
 export { validateGroup, validateText }

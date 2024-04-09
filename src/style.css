@@ -113,6 +113,14 @@ button {
     font-weight: 800;
 }
 
+
+dialog:not(.desc-dialog) {
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .desc-dialog {
     margin: 0;
     padding: 5px;
@@ -125,31 +133,31 @@ button {
     word-wrap: break-word;
     z-index: 11;
 }
-.task-dialog, .group-dialog {
-    border-radius: 20px;
-}
+
 .task-dialog {
     width: 60%;
 }
-.task-dialog div {
-    display: flex;
-    flex-direction: column;
+.task-dialog div * {
+    display: block;
 }
-.task-dialog div input {
+.task-dialog input, .task-dialog select, .task-dialog label {
     width: 50%;
 }
-.group-dialog {
-
-    gap: 20px;
-}
-dialog .group-section {
+.task-dialog button, .task-dialog select {
     display: inline;
 }
-dialog select, label {
-    width: 50%;
+
+.group-dialog button {
+    width: 80px;
 }
 
-.group-dialog[open], .task-dialog[open] {
+.error-dialog {
+    width: 400px;
+    align-items: center;
+    border-color: rgb(199, 0, 0);
+}
+
+dialog[open]:not(.desc-dialog) {
     animation: fade-in 0.3s ease-out;
 }
 

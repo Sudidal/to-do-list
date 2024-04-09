@@ -11,7 +11,6 @@ const descDialog = document.querySelector(".desc-dialog")
 
 const newGroupBtn = document.querySelector(".new-group-btn")
 const groupDialog = document.querySelector(".group-dialog")
-const addGroupBtn = document.querySelector("#add-group-btn")
 const groupInput = document.querySelector("#group-input")
 
 const taskDialog = document.querySelector(".task-dialog")
@@ -21,24 +20,33 @@ const dateInput = document.querySelector("#date-input")
 const descInput = document.querySelector("#desc-input")
 const createTaskBtn = document.querySelector("#create-task-btn")
 
+const errorDialog = document.querySelector(".error-dialog")
+
 let isDescModal = false;
 
 addBtn.addEventListener("click", () => {
     UpdateSelectGroupList();
     taskDialog.showModal();
 })
+
 newGroupBtn.addEventListener("click", () => {
     groupDialog.showModal();
 })
-addGroupBtn.addEventListener("click", () => {
+taskDialog.querySelector(".cancel").addEventListener("click", () => {
+    taskDialog.close();
+})
+groupDialog.querySelector(".add").addEventListener("click", () => {
     if(addGroup(groupInput.value)) {
         UpdateSelectGroupList();
         groupDialog.close();
     }
 })
+groupDialog.querySelector(".cancel").addEventListener("click", () => {
+    groupDialog.close();
+})
+
 createTaskBtn.addEventListener("click", () => {
     getNewTaskInfo();
-    taskDialog.close();
 })
 document.body.addEventListener("mousedown", () => {
     if(isDescModal) {
@@ -46,6 +54,10 @@ document.body.addEventListener("mousedown", () => {
         isDescModal = false;
     }
 })
+errorDialog.querySelector("button").addEventListener("click", () =>{
+    errorDialog.close();
+})
+
 
 function createTaskElement(task) {
     const element = templateTask.cloneNode(true);
@@ -138,8 +150,16 @@ function getNewTaskInfo() {
     const date = dateInput.value;
     const desc = descInput.value;
 
-    createTask(title, desc, date, group)
+    if(createTask(title, desc, date, group)) {
+        taskDialog.close();
+    }
+}
+
+function showErrorDialog(title, description) {
+    errorDialog.querySelector(".header").textContent = title;
+    errorDialog.querySelector("p").textContent = description;
+    errorDialog.showModal();
 }
 
 
-export { updateTasksList, UpdateGroupList }
+export { updateTasksList, UpdateGroupList, showErrorDialog }

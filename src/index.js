@@ -29,7 +29,7 @@ function Task(title, description, dueDate, group, checked = false) {
 }
 
 function createTask(title, desc, dueDate, group) {
-    if(!validateText(title, "Title", 1, 20) ||
+    if(!validateText(title, "Task Title", 1, 20) ||
        !validateText(dueDate, "dueDate", 1)) {
         return false;
     }

@@ -52,7 +52,6 @@
         </div>
     </div>
     <dialog class="task-dialog">
-        <form method="dialog">
             <div>
                 <!-- group -->
                 <label for="select-group">Select Group</label>
@@ -77,16 +76,25 @@
                 <label for="desc-input">Description</label>
                 <textarea id="desc-input" cols="30" rows="10" placeholder="Describe...."></textarea>
             </div>
-            <button id="create-task-btn" type="button">Create</button>
-            <button>Cancel</button>
-        </form>
+            <div class="button-div">
+                <button id="create-task-btn">Create</button>
+                <button class="cancel">Cancel</button>
+            </div>
     </dialog>
     <dialog class="group-dialog">
         <div>
             <label for="">New Group</label>
             <input id="group-input" type="text" placeholder="new group name">
         </div>
-        <button id="add-group-btn">Add</button>
+        <div>
+            <button class="add">Add</button>
+            <button class="cancel">Cancel</button>
+        </div>
+    </dialog>
+    <dialog class="error-dialog">
+        <h3 class="header">Title</h3>
+        <p>Description</p>
+        <button type="">OK</button>
     </dialog>
 </body>
 </html>
