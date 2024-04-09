@@ -116,6 +116,8 @@ button {
 
 dialog:not(.desc-dialog) {
     border-radius: 20px;
+}
+dialog .dialog-content {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -135,7 +137,7 @@ dialog:not(.desc-dialog) {
 }
 
 .task-dialog {
-    width: 60%;
+    width: 50%;
 }
 .task-dialog div * {
     display: block;
@@ -153,8 +155,10 @@ dialog:not(.desc-dialog) {
 
 .error-dialog {
     width: 400px;
-    align-items: center;
     border-color: rgb(199, 0, 0);
+}
+.error-dialog .dialog-content {
+    align-items: center;
 }
 
 dialog[open]:not(.desc-dialog) {

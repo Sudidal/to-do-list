@@ -43,6 +43,7 @@ function createTask(title, desc, dueDate, group) {
 function deleteTask(task) {
     const index = tasks.indexOf(task);
     tasks.splice(index, 1);
+    populateStorage();
     updateTasksList(tasks);
 }
 
